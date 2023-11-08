@@ -4,20 +4,28 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Scanner from './components/Scanner'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import AddUserAdmin from './pages/AddUserAdmin';
+import Invitations from './pages/Invitations';
+import Register from './pages/Register';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    <Button>Hola</Button>
-    <div className='w-6/12'>
-<Scanner></Scanner>
-    </div>
-      
+    <Router>
+      <Routes>
+        <Route path='/' element={<Login></Login>}></Route>
+        <Route path='/dashboard' element={<Dashboard></Dashboard>}></Route>
+        <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='/invitations' element={<Invitations></Invitations>}></Route>
+        <Route path='/add_user_admin' element={<AddUserAdmin></AddUserAdmin>}></Route>
+
+      </Routes>
+    </Router>
     </>
   )
 }
