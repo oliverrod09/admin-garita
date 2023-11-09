@@ -6,24 +6,25 @@ import { DrawerDash } from "../components/DrawerDash";
 import { ContextMain } from "../context/ContextMain";
 import { Navigate } from "react-router-dom";
 
-function UsersList() {
+function ResidenceList() {
   const [data, setData] = useState([]);
+  const linkDet = "/residence/"
   const columns = [
     {
-      header: "Nombre",
-      accessorKey: "name",
+      header: "Numero",
+      accessorKey: "number",
     },
     {
-      header: "Correo",
-      accessorKey: "email",
+      header: "Dirección",
+      accessorKey: "address",
     },
     {
-      header: "Residencia",
-      accessorKey: "residenceIdenti",
+      header: "Identificador",
+      accessorKey: "identifier",
     },
     {
-      header: "Residence dirección",
-      accessorKey: "residence.address"
+      header: "Creado",
+      accessorKey: "createdAt"
     }
   ];
   const { auth } = useContext(ContextMain);
@@ -37,7 +38,7 @@ function UsersList() {
   }
 
   async function getUsers() {
-    const url = `${back}/users/admin`;
+    const url = `${back}/residence/`;
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -60,10 +61,10 @@ function UsersList() {
           <DrawerDash></DrawerDash>
           <p className="font-extrabold">Usuarios</p>
         </div>
-        <TableOne data={data} columns={columns}></TableOne>
+        <TableOne data={data} columns={columns} linkDet={linkDet}></TableOne>
       </main>
     </>
   );
 }
 
-export default UsersList;
+export default ResidenceList;
