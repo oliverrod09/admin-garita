@@ -27,7 +27,7 @@ function UsersList() {
     }
   ];
   const { auth } = useContext(ContextMain);
-
+  const linkDet = '/user/'
   useEffect(() => {
     getUsers();
   }, []);
@@ -60,7 +60,7 @@ function UsersList() {
           <DrawerDash></DrawerDash>
           <p className="font-extrabold">Usuarios</p>
         </div>
-        <TableOne data={data} columns={columns}></TableOne>
+        <TableOne data={data} columns={columns} linkDet={linkDet}></TableOne>
       </main>
     </>
   );

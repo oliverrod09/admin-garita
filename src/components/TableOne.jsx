@@ -7,8 +7,9 @@ import {
   getSortedRowModel,
   getFilteredRowModel,
 } from "@tanstack/react-table";
+import { Link } from "react-router-dom";
 
-function TableOne({ data, columns }) {
+function TableOne({ data, columns, linkDet }) {
   const [sorting, setSorting] = useState([]);
   const [filtering, setFiltering] = useState("");
 
@@ -28,33 +29,33 @@ function TableOne({ data, columns }) {
   });
 
   return (
-    <div className="">
-      <div className="mx-auto w-10/12">
+    <div className="mx-auto w-10/12">
+      <div className="flex items-center justify-between my-4">
         <input
           type="text"
           value={filtering}
           placeholder="Buscar"
           onChange={(e) => setFiltering(e.target.value)}
-          className="w-full my-2 rounded-lg py-2 text-center "
+          className="w-full md:w-1/3 p-2 border border-gray-300 rounded-lg"
         />
       </div>
-      <div className="overflow-x-scroll text-xs md:text-base">
-        <table className="bg-white ">
-          <thead>
+      <div className="overflow-x-scroll">
+        <table className="min-w-full bg-white border border-gray-300">
+          <thead className="bg-blue-500 text-white">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
+                    className="p-2 cursor-pointer"
                   >
                     {header.isPlaceholder ? null : (
-                      <div>
+                      <div className="flex items-center">
                         {flexRender(
                           header.column.columnDef.header,
                           header.getContext()
                         )}
-
                         {
                           { asc: "⬆️", desc: "⬇️" }[
                             header.column.getIsSorted() ?? null
@@ -69,56 +70,51 @@ function TableOne({ data, columns }) {
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
+              <Link
+                key={row.id}
+                to={`${linkDet}${row.original.id}`}
+                className="  contents cursor-pointer"
+              >
+                <tr className="hover:bg-cyan-200">
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id} className="p-2 border border-gray-300">
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              </Link>
             ))}
           </tbody>
-          <tfoot>
-            {table.getFooterGroups().map((footerGroup) => (
-              <tr key={footerGroup.id}>
-                {footerGroup.headers.map((footer) => (
-                  <th key={footer.id}>
-                    {flexRender(
-                      footer.column.columnDef.footer,
-                      footer.getContext()
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </tfoot>
         </table>
       </div>
 
-      <div className="flex gap-3 pt-4 w-full justify-center">
+      <div className="flex gap-3 mt-4">
         <button
-          className="bg-blue-700 border-2 border-white px-4 py-2 rounded-lg"
+          className="bg-blue-700 text-white px-4 py-2 rounded-lg"
           onClick={() => table.setPageIndex(0)}
         >
-          Primer Pagina
+          Primer Página
         </button>
         <button
-          className="bg-blue-700 border-2 border-white px-4 py-2 rounded-lg"
+          className="bg-blue-700 text-white px-4 py-2 rounded-lg"
           onClick={() => table.previousPage()}
         >
-          Pagina Anterior
+          Página Anterior
         </button>
         <button
-          className="bg-blue-700 border-2 border-white px-4 py-2 rounded-lg"
+          className="bg-blue-700 text-white px-4 py-2 rounded-lg"
           onClick={() => table.nextPage()}
         >
-          Pagina Siguiente
+          Página Siguiente
         </button>
         <button
-          className="bg-blue-700 border-2 border-white px-4 py-2 rounded-lg"
+          className="bg-blue-700 text-white px-4 py-2 rounded-lg"
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
         >
-          Ultima Pagina
+          Última Página
         </button>
       </div>
     </div>
