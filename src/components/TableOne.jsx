@@ -40,7 +40,7 @@ function TableOne({ data, columns, linkDet }) {
         />
       </div>
       <div className="overflow-x-scroll">
-        <table className="min-w-full bg-white border border-gray-300">
+        <table className="min-w-full bg-white border text-xs md:text-base border-gray-300">
           <thead className="bg-blue-500 text-white">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -91,7 +91,7 @@ function TableOne({ data, columns, linkDet }) {
         </table>
       </div>
 
-      <div className="flex gap-3 mt-4">
+      <div className="flex gap-3 text-xs md:text-base justify-center mt-4">
         <button
           className="bg-blue-700 text-white px-4 py-2 rounded-lg"
           onClick={() => table.setPageIndex(0)}

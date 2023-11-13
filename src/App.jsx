@@ -14,6 +14,9 @@ import UsersList from './pages/UsersList';
 import ResidenceList from './pages/ResidenceList';
 import DetailsUser from './pages/DetailsUser'; 
 import DetailsResidence from "./pages/DetailsResidence";
+import UserEdit from './pages/edits/UserEdit';
+import AddResidence from './pages/AddResidence';
+import ResidenceEdit from './pages/edits/ResidenceEdit';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -26,10 +29,13 @@ function App() {
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/invitations' element={<Invitations></Invitations>}></Route>
         <Route path='/add_user_admin' element={<AddUserAdmin></AddUserAdmin>}></Route>
+        <Route path='/add_residence' element={<AddResidence></AddResidence>}></Route>
         <Route path='/list_users' element={<UsersList></UsersList>}></Route>
         <Route path='/list_residences' element={<ResidenceList></ResidenceList>}></Route>
         <Route path='/user/:id' element={<DetailsUser></DetailsUser>}></Route>
         <Route path='/residence/:id' element={<DetailsResidence></DetailsResidence>}></Route>
+        <Route path='/edit_user/:id' element={<UserEdit></UserEdit>}></Route>
+        <Route path='/edit_residence/:id' element={<ResidenceEdit></ResidenceEdit>}></Route>
       </Routes>
     </Router>
     </>

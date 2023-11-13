@@ -4,7 +4,19 @@ import { back } from "../const/urls";
 import Axios from "axios";
 import { DrawerDash } from "../components/DrawerDash";
 import { ContextMain } from "../context/ContextMain";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
+import {
+  IconButton,
+  SpeedDial,
+  SpeedDialHandler,
+  SpeedDialContent,
+  SpeedDialAction,
+  Typography,
+} from "@material-tailwind/react";
+import {
+  PlusIcon,
+  PlusCircleIcon
+} from "@heroicons/react/24/outline";
 
 function UsersList() {
   const [data, setData] = useState([]);
@@ -19,15 +31,15 @@ function UsersList() {
     },
     {
       header: "Residencia",
-      accessorKey: "residenceIdenti",
+      accessorKey: "residence.identifier",
     },
     {
       header: "Residence dirección",
-      accessorKey: "residence.address"
-    }
+      accessorKey: "residence.address",
+    },
   ];
   const { auth } = useContext(ContextMain);
-  const linkDet = '/user/'
+  const linkDet = "/user/";
   useEffect(() => {
     getUsers();
   }, []);
@@ -61,6 +73,25 @@ function UsersList() {
           <p className="font-extrabold">Usuarios</p>
         </div>
         <TableOne data={data} columns={columns} linkDet={linkDet}></TableOne>
+        {/* <div className="fixed bottom-8 right-8">
+          <SpeedDial>
+            <SpeedDialHandler>
+              <IconButton size="lg" className="rounded-full">
+                <PlusIcon className="h-5 w-5 transition-transform group-hover:rotate-45" />
+              </IconButton>
+            </SpeedDialHandler>
+            <SpeedDialContent>
+              <Link to={`/add_user/`} className="">
+                <SpeedDialAction className="h-16 w-16">
+                  <PlusCircleIcon className="h-5 w-5" />
+                  <Typography color="blue-gray" className="text-xs font-normal">
+                    Agregar
+                  </Typography>
+                </SpeedDialAction>
+              </Link>
+            </SpeedDialContent>
+          </SpeedDial>
+        </div> */}
       </main>
     </>
   );
