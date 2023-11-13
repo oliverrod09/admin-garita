@@ -17,6 +17,11 @@ import DetailsResidence from "./pages/DetailsResidence";
 import UserEdit from './pages/edits/UserEdit';
 import AddResidence from './pages/AddResidence';
 import ResidenceEdit from './pages/edits/ResidenceEdit';
+import ControlList from './pages/ControlList';
+import InvitationList from './pages/InvitationList';
+import DetailsInvitation from './pages/DetailsInvitation';
+import VerifyInv from "./pages/VerifyInv";
+import InvitationCod from './pages/InvitationCod';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -30,12 +35,19 @@ function App() {
         <Route path='/invitations' element={<Invitations></Invitations>}></Route>
         <Route path='/add_user_admin' element={<AddUserAdmin></AddUserAdmin>}></Route>
         <Route path='/add_residence' element={<AddResidence></AddResidence>}></Route>
+        <Route path='/list_invitations' element={<InvitationList></InvitationList>}></Route>
         <Route path='/list_users' element={<UsersList></UsersList>}></Route>
         <Route path='/list_residences' element={<ResidenceList></ResidenceList>}></Route>
+        <Route path='/list_controls' element={<ControlList></ControlList>}></Route>
         <Route path='/user/:id' element={<DetailsUser></DetailsUser>}></Route>
+        <Route path='/invitation/:id' element={<DetailsInvitation></DetailsInvitation>}></Route>
         <Route path='/residence/:id' element={<DetailsResidence></DetailsResidence>}></Route>
         <Route path='/edit_user/:id' element={<UserEdit></UserEdit>}></Route>
         <Route path='/edit_residence/:id' element={<ResidenceEdit></ResidenceEdit>}></Route>
+        <Route path='/verify_cod' element={<VerifyInv></VerifyInv>}></Route>
+        <Route path='/invitation_verif/:cod' element={<InvitationCod></InvitationCod>}></Route>
+
+
       </Routes>
     </Router>
     </>

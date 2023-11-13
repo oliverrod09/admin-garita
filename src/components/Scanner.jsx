@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
+import { Link } from 'react-router-dom';
 
 function Scanner() {
   const [scanResult, setScanResult] = useState(null);
   const [scanner, setScanner] = useState(null);
+  const qrCodeId = "reader"
+  let qrCodeScanner
 
   useEffect(() => {
-    if (!scanner) {
+    if(!qrCodeScanner?.getState()){
       const qrCodeScanner = new Html5QrcodeScanner("reader", {
         qrbox: {
           width: 300,
@@ -30,19 +33,19 @@ function Scanner() {
     }
 
     return () => {
-      if (scanner) {
-        scanner.clear();
-      }
+      
     };
-  }, [scanner]);
+  }, []);
 
   return (
-    <div className='w-10/12 mx-auto'>
-      <h1>Scanner</h1>
+    <div className='w-10/12 md:w-8/12 mx-auto flex justify-center'>
       {scanResult ? (
-        <p>{scanResult}</p>
+        // <p>{scanResult}</p>
+        <Link className='my-6' to={`/invitation_verif/${scanResult}`}>
+          <button className='bg-black text-white rounded-md px-4 py-2'>Usar Invitación</button>
+        </Link>
       ) : (
-        <div id="reader"></div>
+        <div id={qrCodeId}></div>
       )}
     </div>
   );

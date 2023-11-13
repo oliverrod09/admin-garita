@@ -6,6 +6,7 @@ import Axios from "axios";
 import Select from "react-select";
 import { back } from "../const/urls";
 import { Alert } from "@material-tailwind/react";
+import { ButtonBack } from "../components/ButtonBack";
 
 function AddUserAdmin() {
   const { auth } = useContext(ContextMain);
@@ -121,83 +122,88 @@ function AddUserAdmin() {
           {serverError}
         </Alert>
 
-        <form
-          action=""
-          className="w-max py-4 px-8 rounded-md my-10 md:mt-10 mx-auto bg-white shadow-lg shadow-white"
-        >
-          <h2 className="text-3xl">Crear una usuario de control</h2>
-          <div className="">
-            <div className="flex flex-col md:flex-row gap-4 my-4">
-              <div className="flex flex-col">
-                <label className="" htmlFor="name">
-                  Nombre
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  className="p-4 rounded-lg border-gray-300 border-2"
-                  onChange={handdleChange}
-                  value={control.name}
-                />
-              </div>
-              <div className="flex flex-col">
-                <label className="" htmlFor="email">
-                  email
-                </label>
-                <input
-                  type="text"
-                  name="email"
-                  className="p-4 rounded-lg border-gray-300 border-2"
-                  onChange={handdleChange}
-                  value={control.email}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col md:flex-row md:justify-center gap-4 my-4">
-              <div className="flex w-full md:w-6/12 flex-col">
-                <label className="" htmlFor="password">
-                  password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  className="p-4 rounded-lg border-gray-300 border-2"
-                  onChange={handdleChange}
-                  value={control.password}
-                />
-              </div>
-              <div className="flex w-full md:w-6/12 flex-col">
-                <label className="" htmlFor="expiresAt">
-                  Rol:
-                </label>
-                <Select
-                  defaultValue={role[1]}
-                  options={role}
-                  onChange={handdleSelect}
-                  theme={(theme) => ({
-                    ...theme,
-                    borderRadius: 5,
-                    colors: {
-                      ...theme.colors,
-                      primary25: "darkgray",
-                      primary: "black",
-                    },
-                  })}
-                  className="p-2 rounded-lg border-gray-300 border-2 focus:border-black"
-                ></Select>
-                {/* <label className="" htmlFor="expiresAt">Fecha</label>
-                <input type="date" name="expiresAt" className="p-4 rounded-lg border-gray-300 border-2" /> */}
-              </div>
-            </div>
+        <div className="w-full relative md:h-[calc(100vh-180px)] flex items-center justify-center my-10">
+          <div className="absolute z-20 left-1 top-8 md:left-6 md:bottom-10 ">
+            <ButtonBack></ButtonBack>
           </div>
-          <button
-            type="button"
-            className="w-full rounded-lg bg-black py-4 px-8 text-white"
-            onClick={handdleSubmit}
+          <form
+            action=""
+            className="w-max py-4 px-8 rounded-md mx-auto bg-white shadow-lg shadow-white"
           >
-            Crear
-          </button>
-        </form>
+            <h2 className="text-3xl">Crear una usuario de control</h2>
+            <div className="">
+              <div className="flex flex-col md:flex-row gap-4 my-4">
+                <div className="flex flex-col">
+                  <label className="" htmlFor="name">
+                    Nombre
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    className="p-4 rounded-lg border-gray-300 border-2"
+                    onChange={handdleChange}
+                    value={control.name}
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label className="" htmlFor="email">
+                    email
+                  </label>
+                  <input
+                    type="text"
+                    name="email"
+                    className="p-4 rounded-lg border-gray-300 border-2"
+                    onChange={handdleChange}
+                    value={control.email}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row md:justify-center gap-4 my-4">
+                <div className="flex w-full md:w-6/12 flex-col">
+                  <label className="" htmlFor="password">
+                    password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    className="p-4 rounded-lg border-gray-300 border-2"
+                    onChange={handdleChange}
+                    value={control.password}
+                  />
+                </div>
+                <div className="flex w-full md:w-6/12 flex-col">
+                  <label className="" htmlFor="expiresAt">
+                    Rol:
+                  </label>
+                  <Select
+                    defaultValue={role[1]}
+                    options={role}
+                    onChange={handdleSelect}
+                    theme={(theme) => ({
+                      ...theme,
+                      borderRadius: 5,
+                      colors: {
+                        ...theme.colors,
+                        primary25: "darkgray",
+                        primary: "black",
+                      },
+                    })}
+                    className="p-2 rounded-lg border-gray-300 border-2 focus:border-black"
+                  ></Select>
+                  {/* <label className="" htmlFor="expiresAt">Fecha</label>
+                <input type="date" name="expiresAt" className="p-4 rounded-lg border-gray-300 border-2" /> */}
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="w-full rounded-lg bg-black py-4 px-8 text-white"
+              onClick={handdleSubmit}
+            >
+              Crear
+            </button>
+          </form>
+        </div>
       </main>
     </>
   );
