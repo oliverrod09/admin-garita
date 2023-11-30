@@ -13,7 +13,7 @@ import { back } from "../const/urls";
 import { ContextMain } from "../context/ContextMain";
 
 function Login() {
-  const {setAuth, auth} = useContext(ContextMain)
+  const {setAuth, auth, setLevel} = useContext(ContextMain)
     const [user, setUser] = useState({
         email:"",
         password:""
@@ -41,6 +41,8 @@ function Login() {
               if (response.status === 200) {
                 console.log(response.data.token);
                 sessionStorage.setItem("token", response.data.token);
+                sessionStorage.setItem("level", response.data.level);
+                setLevel(response.data.level)
                 setAuth(true)
                 setRedirect(true);
               }

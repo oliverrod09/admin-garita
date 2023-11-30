@@ -22,6 +22,9 @@ import InvitationList from './pages/InvitationList';
 import DetailsInvitation from './pages/DetailsInvitation';
 import VerifyInv from "./pages/VerifyInv";
 import InvitationCod from './pages/InvitationCod';
+import DetailsUserControl from './pages/DetailsUserControl';
+import ControlEdit from './pages/edits/ControEdit';
+import NotAuth from './pages/redirect/NotAuth';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -40,13 +43,15 @@ function App() {
         <Route path='/list_residences' element={<ResidenceList></ResidenceList>}></Route>
         <Route path='/list_controls' element={<ControlList></ControlList>}></Route>
         <Route path='/user/:id' element={<DetailsUser></DetailsUser>}></Route>
+        <Route path='/userControl/:id' element={<DetailsUserControl></DetailsUserControl>}></Route>
         <Route path='/invitation/:id' element={<DetailsInvitation></DetailsInvitation>}></Route>
         <Route path='/residence/:id' element={<DetailsResidence></DetailsResidence>}></Route>
         <Route path='/edit_user/:id' element={<UserEdit></UserEdit>}></Route>
+        <Route path='/edit_control/:id' element={<ControlEdit></ControlEdit>}></Route>
         <Route path='/edit_residence/:id' element={<ResidenceEdit></ResidenceEdit>}></Route>
         <Route path='/verify_cod' element={<VerifyInv></VerifyInv>}></Route>
         <Route path='/invitation_verif/:cod' element={<InvitationCod></InvitationCod>}></Route>
-
+        <Route path='/not-authorized' element={<NotAuth></NotAuth>}></Route>
 
       </Routes>
     </Router>

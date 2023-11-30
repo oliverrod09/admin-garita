@@ -1,44 +1,93 @@
 import { useState, useContext, useEffect } from "react";
-import { DrawerDash } from "../components/DrawerDash";
-import { ContextMain } from "../context/ContextMain";
-import { Navigate } from "react-router-dom";
-import Axios from "axios";
+import { DrawerDash } from "../../components/DrawerDash";
+import { ButtonBack } from "../../components/ButtonBack";
+import { ContextMain } from "../../context/ContextMain";
 import Select from "react-select";
-import { back } from "../const/urls";
+import { useParams, Navigate, Link } from "react-router-dom";
+import Axios from "axios";
+import { back } from "../../const/urls";
 import { Alert } from "@material-tailwind/react";
-import { ButtonBack } from "../components/ButtonBack";
-import NotAuth from "./redirect/NotAuth";
 
-function AddUserAdmin() {
-  const { auth, level } = useContext(ContextMain);
-  const [alertOk, setAlertOk] = useState(false);
-  const [alertError, setAlertError] = useState(false);
-  const [serverError, setServerError] = useState("");
+function ControlEdit() {
+  const { id } = useParams();
+  const { auth } = useContext(ContextMain);
   const [role, setRole] = useState([]);
-  const [control, setControl] = useState({
+  const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
+    cedula: "",
     roleId: 0,
   });
-  const options = [
-    { value: 15, label: "15 minutos" },
-    { value: 30, label: "30 minutos" },
-    { value: 60, label: "1 hora" },
-    { value: 120, label: "2 horas" },
-    { value: 180, label: "3 horas" },
-    { value: 300, label: "5 horas" },
-  ];
+  const [alertOk, setAlertOk] = useState(false);
+  const [alertError, setAlertError] = useState(false);
+  const [serverError, setServerError] = useState("");
+  const [serverOk, setServerOk] = useState("");
+
   useEffect(() => {
-    getRole();
+    getUser();
+    getRole()
   }, []);
+
+  
 
   if (!auth) {
     return <Navigate to={"/"}></Navigate>;
   }
 
-  if ( Number(level) !== 1) {
-    return  <NotAuth></NotAuth>
+  function handdleChange(e) {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  }
+
+  async function handdleSubmit() {
+    const url = `${back}/control/admin/${id}`;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+      },
+    };
+    try {
+      const response = await Axios.put(url, user, config);
+      if (response.status === 200) {
+        setServerOk("Actualizado correctamente");
+        setAlertOk(true);
+        setUser({
+          name: response.data.name,
+          email: response.data.email,
+          password: "",
+          roleId: response.data.roleId,
+        });
+      }
+    } catch (error) {
+      setAlertError(true);
+      setServerError(error.response.data.message);
+      console.log(error.response.data.message); // Aquí deberías poder acceder al mensaje de error
+    }
+  }
+
+  async function getUser() {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "bearer " + sessionStorage.getItem("token"),
+      },
+    };
+    const url = `${back}/control/${id}`;
+    try {
+      const response = await Axios.get(url, config);
+      if (response.status == 200) {
+        setUser({
+          name: response.data.name,
+          email: response.data.email,
+          password: "",
+          roleId: response.data.roleId,
+        });
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+      setServerError(error.response.data.message);
+    }
   }
 
   async function getRole() {
@@ -63,43 +112,11 @@ function AddUserAdmin() {
       setAlertError(true);
     }
   }
-
   function handdleSelect(e) {
-    setControl((prevControl) => ({
+    setUser((prevControl) => ({
       ...prevControl,
       roleId: e.value,
     }));
-  }
-
-  function handdleChange(e) {
-    setControl({ ...control, [e.target.name]: e.target.value });
-  }
-
-  async function handdleSubmit() {
-    const token = sessionStorage.getItem("token");
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + sessionStorage.getItem("token"),
-      },
-    };
-    const url = `${back}/control/`;
-    try {
-      const response = await Axios.post(url, control, config);
-      if (response.status === 201) {
-        setControl({
-          name: "",
-          email: "",
-          password: "",
-          roleId: 0,
-        });
-        setAlertOk(true);
-      }
-    } catch (error) {
-      setServerError(error.response.data.message);
-      setAlertError(true);
-      console.log(error.response.data.message);
-    }
   }
 
   return (
@@ -115,7 +132,7 @@ function AddUserAdmin() {
           onClose={() => setAlertOk(false)}
           className="fixed z-50 top-4 right-4 w-max"
         >
-          Agregado correctamente
+          Editado correctamente
         </Alert>
 
         <Alert
@@ -135,7 +152,7 @@ function AddUserAdmin() {
             action=""
             className="w-max py-4 px-8 rounded-md mx-auto bg-white shadow-lg shadow-white"
           >
-            <h2 className="text-3xl">Crear una usuario de control</h2>
+            <h2 className="text-3xl">Editar usuario de control</h2>
             <div className="">
               <div className="flex flex-col md:flex-row gap-4 my-4">
                 <div className="flex flex-col">
@@ -147,7 +164,7 @@ function AddUserAdmin() {
                     name="name"
                     className="p-4 rounded-lg border-gray-300 border-2"
                     onChange={handdleChange}
-                    value={control.name}
+                    value={user.name}
                   />
                 </div>
                 <div className="flex flex-col">
@@ -159,7 +176,7 @@ function AddUserAdmin() {
                     name="email"
                     className="p-4 rounded-lg border-gray-300 border-2"
                     onChange={handdleChange}
-                    value={control.email}
+                    value={user.email}
                   />
                 </div>
               </div>
@@ -173,7 +190,7 @@ function AddUserAdmin() {
                     name="password"
                     className="p-4 rounded-lg border-gray-300 border-2"
                     onChange={handdleChange}
-                    value={control.password}
+                    value={user.password}
                   />
                 </div>
                 <div className="flex w-full md:w-6/12 flex-col">
@@ -181,7 +198,7 @@ function AddUserAdmin() {
                     Rol:
                   </label>
                   <Select
-                    defaultValue={role[1]}
+                  defaultValue={user.roleId}
                     options={role}
                     onChange={handdleSelect}
                     theme={(theme) => ({
@@ -214,4 +231,4 @@ function AddUserAdmin() {
   );
 }
 
-export default AddUserAdmin;
+export default ControlEdit;

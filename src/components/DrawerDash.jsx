@@ -18,10 +18,11 @@ export function DrawerDash() {
   const [open, setOpen] = useState(false);
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
-  const { setAuth, closeSesion, isLogout } = useContext(ContextMain);
+  const { setAuth, closeSesion, isLogout, setLevel } = useContext(ContextMain);
 
   function cerrar() {
     sessionStorage.clear();
+    setLevel(0)
     isLogout();
   }
   return (

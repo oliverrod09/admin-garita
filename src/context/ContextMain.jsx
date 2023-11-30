@@ -6,10 +6,12 @@ export const ContextMain = createContext();
 
 export function ContextMainProvider(props) {
   const [auth, setAuth] = useState(!!sessionStorage.getItem("token"));
+  const [level, setLevel] = useState(0)
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
       setAuth(true);
+      setLevel(sessionStorage.getItem("level"))
     } else {
       setAuth(false);
     }
@@ -17,10 +19,13 @@ export function ContextMainProvider(props) {
 
   function isLogin() {
     setAuth(true);
+    console.log(sessionStorage.getItem("level"))
+    setLevel(sessionStorage.getItem("level"))
   }
 
   function isLogout() {
     setAuth(false);
+    setLevel(0)
   }
 
   function formatDate(date) {
@@ -37,7 +42,7 @@ export function ContextMainProvider(props) {
   }
 
   return (
-    <ContextMain.Provider value={{ isLogin, isLogout, auth, setAuth, formatDate }}>
+    <ContextMain.Provider value={{ isLogin, isLogout, auth, setAuth, formatDate, level, setLevel }}>
       {props.children}
     </ContextMain.Provider>
   );

@@ -5,6 +5,7 @@ import Axios from "axios";
 import { DrawerDash } from "../components/DrawerDash";
 import { ContextMain } from "../context/ContextMain";
 import { Navigate, Link } from "react-router-dom";
+import NotAuth from "./redirect/NotAuth"; 
 import {
   IconButton,
   SpeedDial,
@@ -38,14 +39,18 @@ function ControlList() {
         accessorKey: "role.name",
       },
   ];
-  const { auth } = useContext(ContextMain);
-  const linkDet = "/user/";
+  const { auth, level } = useContext(ContextMain);
+  const linkDet = "/userControl/";
   useEffect(() => {
     getUsers();
   }, []);
 
   if (!auth) {
     return <Navigate to={"/"}></Navigate>;
+  }
+
+  if ( Number(level) !== 1) {
+    return  <Navigate to={"/not-authorized"}></Navigate>;
   }
 
   async function getUsers() {

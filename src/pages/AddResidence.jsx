@@ -13,6 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { back } from "../const/urls";
 import Axios from "axios";
+import NotAuth from "./redirect/NotAuth";
 
 function AddResidence() {
   const [residence, setResidence] = useState({
@@ -20,7 +21,7 @@ function AddResidence() {
     identifier: "",
     address: "",
   });
-  const { auth } = useContext(ContextMain);
+  const { auth, level } = useContext(ContextMain);
   const [alertOk, setAlertOk] = useState(false);
   const [alertError, setAlertError] = useState(false);
   const [serverError, setServerError] = useState("");
@@ -61,6 +62,10 @@ function AddResidence() {
 
   if (!auth) {
     return <Navigate to={"/"}></Navigate>;
+  }
+
+  if ( Number(level) !== 1) {
+    return  <NotAuth></NotAuth>
   }
 
   return (
