@@ -126,23 +126,23 @@ function DetailsUserControl() {
                   <div className="flex flex-col space-y-2">
                     <div className="flex">
                       <p className="font-semibold w-1/4">ID:</p>
-                      <p className="mt-1">{user.id}</p>
+                      <p className="mt-6 lg:mt-0">{user.id}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Nombre:</p>
-                      <p className="mt-1">{user.name}</p>
+                      <p className="mt-6 lg:mt-0">{user.name}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Email:</p>
-                      <p className="mt-1">{user.email}</p>
+                      <p className="mt-6 lg:mt-0">{user.email}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Rol:</p>
-                      <p className="mt-1">{user.role?.name}</p>
+                      <p className="mt-6 lg:mt-0">{user.role?.name}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Creado en:</p>
-                      <p className="mt-1">{user.createdAt}</p>
+                      <p className="mt-6 lg:mt-0">{user.createdAt}</p>
                     </div>
                   </div>
                 </div>

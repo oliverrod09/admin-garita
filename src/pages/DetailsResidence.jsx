@@ -118,23 +118,23 @@ function DetailsResidence() {
               <div className="flex flex-col space-y-2">
                 <div className="flex gap-2">
                   <p className="font-semibold w-1/4">ID:</p>
-                  <p className="mt-1">{residence.id}</p>
+                  <p className="mt-6 lg:mt-0">{residence.id}</p>
                 </div>
                 <div className="flex gap-2">
                   <p className="font-semibold w-1/4">Número:</p>
-                  <p className="mt-1">{residence.number}</p>
+                  <p className="mt-6 lg:mt-0">{residence.number}</p>
                 </div>
                 <div className="flex gap-2">
                   <p className="font-semibold w-1/4">Dirección:</p>
-                  <p className="mt-1">{residence.address}</p>
+                  <p className="mt-6 lg:mt-0">{residence.address}</p>
                 </div>
                 <div className="flex gap-2">
                   <p className="font-semibold w-1/4">Identificador:</p>
-                  <p className="mt-1">{residence.identifier}</p>
+                  <p className="mt-6 lg:mt-0">{residence.identifier}</p>
                 </div>
                 <div className="flex gap-2">
                   <p className="font-semibold w-1/4">Creado en:</p>
-                  <p className="mt-1">{residence.createdAt}</p>
+                  <p className="mt-6 lg:mt-0">{residence.createdAt}</p>
                 </div>
               </div>
             </div>

@@ -119,37 +119,37 @@ function DetailsInvitation() {
                   <div className="flex flex-col space-y-2">
                     <div className="flex">
                       <p className="font-semibold w-1/4">ID:</p>
-                      <p className="mt-1">{invitation.id}</p>
+                      <p className="mt-6 lg:mt-0">{invitation.id}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Nombre:</p>
-                      <p className="mt-1">{invitation.name}</p>
+                      <p className="mt-6 lg:mt-0">{invitation.name}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Estado:</p>
-                      <p className="mt-1">
+                      <p className="mt-6 lg:mt-0">
                         {invitation.used ? <>Usada</> : <>No usada</>}
                       </p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Cédula:</p>
-                      <p className="mt-1">{invitation.cedula}</p>
+                      <p className="mt-6 lg:mt-0">{invitation.cedula}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Teléfono:</p>
-                      <p className="mt-1">{invitation.cellphone}</p>
+                      <p className="mt-6 lg:mt-0">{invitation.cellphone}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Matricula:</p>
-                      <p className="mt-1">{invitation.board}</p>
+                      <p className="mt-6 lg:mt-0">{invitation.board}</p>
                     </div>
                     <div className="flex gap-2">
                       <p className="font-semibold w-1/4">Descripción:</p>
-                      <p className="mt-1">{invitation.description}</p>
+                      <p className="mt-6 lg:mt-0">{invitation.description}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Creado en:</p>
-                      <p className="mt-1">{invitation.createdAt}</p>
+                      <p className="mt-6 lg:mt-0">{invitation.createdAt}</p>
                     </div>
                   </div>
                 </div>

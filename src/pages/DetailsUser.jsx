@@ -160,19 +160,19 @@ function DetailsUser() {
                   <div className="flex flex-col space-y-2">
                     <div className="flex">
                       <p className="font-semibold w-1/4">ID:</p>
-                      <p className="mt-1">{user.residence?.id}</p>
+                      <p className="mt-6 lg:mt-0">{user.residence?.id}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Número:</p>
-                      <p className="mt-1">{user.residence?.number}</p>
+                      <p className="mt-6 lg:mt-0">{user.residence?.number}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Dirección:</p>
-                      <p className="mt-1">{user.residence?.address}</p>
+                      <p className="mt-6 lg:mt-0">{user.residence?.address}</p>
                     </div>
                     <div className="flex">
                       <p className="font-semibold w-1/4">Creado en:</p>
-                      <p className="mt-1">{user.residence?.createdAt}</p>
+                      <p className="mt-6 lg:mt-0">{user.residence?.createdAt}</p>
                     </div>
                   </div>
                 </div>
